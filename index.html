@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farhan Abid - AI & Data Science Professional</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #0066ff;
+        --secondary: #00d4ff;
+        --dark: #0a0e27;
+        --darker: #050812;
+        --light: #f0f4ff;
+        --text: #e0e0e0;
+        --accent: #ff6b6b;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(10, 14, 39, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .nav-links a:hover {
+        color: var(--secondary);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6rem 2rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        gap: 4rem;
+      }
+
+      .hero-content {
+        flex: 1;
+        animation: slideInLeft 0.8s ease-out;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.2;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+        color: var(--secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-description {
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+        line-height: 1.8;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .btn {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 102, 255, 0.4);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 102, 255, 0.6);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--secondary);
+        border: 2px solid var(--secondary);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(0, 212, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* Robot Animation */
+      .robot-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: slideInRight 0.8s ease-out;
+      }
+
+      .robot-image {
+        width: 100%;
+        max-width: 500px;
+        animation: float 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.3));
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* About Section */
+      .about {
+        padding: 6rem 2rem;
+        background: rgba(0, 20, 40, 0.5);
+        border-top: 1px solid rgba(0, 212, 255, 0.1);
+      }
+
+      .section-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .about-text p {
+        margin-bottom: 1.5rem;
+        font-size: 1.05rem;
+        line-height: 1.8;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .skill-card {
+        background: rgba(0, 102, 255, 0.1);
+        border: 1px solid rgba(0, 212, 255, 0.3);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .skill-card:hover {
+        background: rgba(0, 102, 255, 0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+      }
+
+      .skill-card h3 {
+        color: var(--secondary);
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .skill-card p {
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+
+      /* Projects Section */
+      .projects {
+        padding: 6rem 2rem;
+        background: rgba(5, 8, 18, 0.8);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: rgba(0, 102, 255, 0.05);
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        border-radius: 0.5rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card:hover {
+        background: rgba(0, 102, 255, 0.15);
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+        border-color: rgba(0, 212, 255, 0.5);
+      }
+
+      .project-card h3 {
+        color: var(--secondary);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .project-card p {
+        margin-bottom: 1rem;
+        flex-grow: 1;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .tech-badge {
+        background: rgba(0, 212, 255, 0.2);
+        color: var(--secondary);
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.25rem;
+        font-size: 0.8rem;
+      }
+
+      .project-link {
+        color: var(--secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .project-link:hover {
+        color: var(--primary);
+      }
+
+      /* Experience Section */
+      .experience {
+        padding: 6rem 2rem;
+        background: rgba(0, 20, 40, 0.5);
+      }
+
+      .timeline {
+        position: relative;
+        padding: 2rem 0;
+      }
+
+      .timeline-item {
+        margin-bottom: 3rem;
+        padding-left: 2rem;
+        border-left: 2px solid rgba(0, 212, 255, 0.3);
+        position: relative;
+      }
+
+      .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -8px;
+        top: 0;
+        width: 14px;
+        height: 14px;
+        background: var(--secondary);
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+      }
+
+      .timeline-item h3 {
+        color: var(--secondary);
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-item .date {
+        color: var(--primary);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-item p {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Contact Section */
+      .contact {
+        padding: 6rem 2rem;
+        background: rgba(5, 8, 18, 0.8);
+        text-align: center;
+      }
+
+      .contact-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .contact-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-item a {
+        color: var(--secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .contact-item a:hover {
+        color: var(--primary);
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 102, 255, 0.1);
+        border: 1px solid rgba(0, 212, 255, 0.3);
+        border-radius: 50%;
+        color: var(--secondary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background: rgba(0, 212, 255, 0.2);
+        transform: translateY(-3px);
+      }
+
+      /* Footer */
+      footer {
+        padding: 2rem;
+        text-align: center;
+        border-top: 1px solid rgba(0, 212, 255, 0.1);
+        color: var(--text);
+        font-size: 0.9rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero {
+          flex-direction: column;
+          padding: 6rem 1rem 2rem;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .nav-links {
+          gap: 1rem;
+          font-size: 0.85rem;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+
+      /* Glow effect */
+      .glow {
+        position: fixed;
+        pointer-events: none;
+        border-radius: 50%;
+        opacity: 0.3;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">FA</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Farhan Abid</h1>
+        <p class="hero-subtitle">AI Engineer | Data Science Enthusiast | Problem Solver</p>
+        <p class="hero-description">
+          I'm a B.Tech Computer Science & Engineering (AI) final-year student passionate about leveraging Artificial Intelligence, Machine Learning, and Data Science to build innovative solutions that solve real-world problems.
+        </p>
+        <div class="cta-buttons">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+      </div>
+      <div class="robot-container">
+        <img src="/robot.png" alt="AI Robot" class="robot-image">
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="section-container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I'm a passionate engineering graduate from Babu Banarasi Das University, Lucknow, dedicated to leveraging technology to create real-world impact. With a strong foundation in AI, software engineering, and data-driven problem solving, I'm committed to building intelligent and scalable digital solutions.
+            </p>
+            <p>
+              My journey has been enriched through hands-on internships and projects where I've worked with cutting-edge technologies, developed ML models, and created compelling data visualizations. I believe in the power of technology to transform businesses and improve lives.
+            </p>
+          </div>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <h3>🤖 AI/ML</h3>
+              <p>Deep learning, neural networks, and machine learning model development</p>
+            </div>
+            <div class="skill-card">
+              <h3>📊 Data Science</h3>
+              <p>Data analysis, visualization, and predictive modeling</p>
+            </div>
+            <div class="skill-card">
+              <h3>💻 Full Stack</h3>
+              <p>Web development with React, Flask, and FastAPI</p>
+            </div>
+            <div class="skill-card">
+              <h3>🔗 GenAI</h3>
+              <p>LLM integration, RAG systems, and AI-powered applications</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+      <div class="section-container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3>AgriYield Predictor</h3>
+            <p>End-to-end machine learning web application that predicts crop yield using Random Forest (95%+ accuracy) with time-series forecasting (76%) to estimate future agricultural trends.</p>
+            <div class="project-tech">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Random Forest</span>
+              <span class="tech-badge">Prophet</span>
+              <span class="tech-badge">FastAPI</span>
+              <span class="tech-badge">React</span>
+            </div>
+            <a href="https://github.com/farhanabid786" class="project-link">View on GitHub →</a>
+          </div>
+
+          <div class="project-card">
+            <h3>AI-Powered PDF Chatbot</h3>
+            <p>Intelligent chatbot built using NVIDIA's Llama API & LangChain, capable of answering questions from multiple uploaded PDFs with conversational memory and interactive chat history.</p>
+            <div class="project-tech">
+              <span class="tech-badge">Streamlit</span>
+              <span class="tech-badge">FAISS</span>
+              <span class="tech-badge">NVIDIA Llama API</span>
+              <span class="tech-badge">LangChain</span>
+            </div>
+            <a href="https://github.com/farhanabid786/AI-Powered-Chitti" class="project-link">View on GitHub →</a>
+          </div>
+
+          <div class="project-card">
+            <h3>AI Complaint Management System</h3>
+            <p>Chatbot-based complaint management system with user login, admin dashboard, and AI-driven ticketing workflows. IBM Hackathon Finalist project featuring vector search and REST API integration.</p>
+            <div class="project-tech">
+              <span class="tech-badge">Flask</span>
+              <span class="tech-badge">SQLite</span>
+              <span class="tech-badge">Hugging Face</span>
+              <span class="tech-badge">REST APIs</span>
+            </div>
+            <a href="https://github.com/farhanabid786" class="project-link">View on GitHub →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+      <div class="section-container">
+        <h2 class="section-title">Experience & Training</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>Artificial Intelligence Intern</h3>
+            <p class="date">Oct 2025 – Dec 2025</p>
+            <p><strong>Infosys Springboard Certification</strong></p>
+            <p>Built an end-to-end AI-powered Crop Yield Prediction and Time-Series Forecasting web application, achieving 95%+ accuracy using Random Forest for yield prediction and 76% accuracy using Prophet for forecasting, with full-stack deployment using fastAPI and React.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>Summer Training – Data Science</h3>
+            <p class="date">Jun 2025 – Aug 2025</p>
+            <p><strong>GRAStech Certification</strong></p>
+            <p>Developed classification models for rainfall and diabetes prediction using Python, improving accuracy by 15% from baseline. Worked with real-world datasets and implemented various ML algorithms.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>B.Tech Computer Science Engineering (AI)</h3>
+            <p class="date">Sept 2022 – June 2026</p>
+            <p><strong>Babu Banarasi Das University, Lucknow</strong></p>
+            <p>CGPA: 8.5/10 | Specializing in Artificial Intelligence and Machine Learning with focus on practical implementation and real-world problem solving.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="section-container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <h3>Email</h3>
+            <a href="mailto:f.abid.work@gmail.com">f.abid.work@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <h3>Phone</h3>
+            <a href="tel:+919335297959">+91 93352 97959</a>
+          </div>
+          <div class="contact-item">
+            <h3>Location</h3>
+            <p>Lucknow, Uttar Pradesh, India</p>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/farhanabid786" class="social-link" title="GitHub">
+            <span>🔗</span>
+          </a>
+          <a href="https://linkedin.com/in/farhan-abid-8001a9253" class="social-link" title="LinkedIn">
+            <span>💼</span>
+          </a>
+          <a href="mailto:f.abid.work@gmail.com" class="social-link" title="Email">
+            <span>✉️</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Farhan Abid. All rights reserved. | Crafted with passion for AI & Data Science</p>
+    </footer>
+
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Active nav link highlighting
+      window.addEventListener('scroll', () => {
+        let current = '';
+        document.querySelectorAll('section').forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.style.color = '';
+          if (link.getAttribute('href').slice(1) === current) {
+            link.style.color = 'var(--secondary)';
+          }
+        });
+      });
+
+      // Parallax effect for robot
+      window.addEventListener('scroll', () => {
+        const robot = document.querySelector('.robot-image');
+        if (robot) {
+          robot.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+        }
+      });
+    </script>
+  </body>
+</html>
