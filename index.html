@@ -82,92 +82,98 @@
           opacity: 0;
         }
       }
+/* ================= NAVIGATION ================= */
 
-      /* Navigation */
-      nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: rgba(5, 8, 18, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 1rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 1000;
-        border-bottom: 2px solid var(--primary);
-        box-shadow: 0 0 20px var(--glow-blue);
-      }
-
-      .logo {
-        font-size: 1.8rem;
-        font-weight: bold;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-shadow: 0 0 20px var(--glow-pink);
-        letter-spacing: 2px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .logo:hover {
-        transform: scale(1.1) rotate(-5deg);
-        filter: drop-shadow(0 0 20px var(--glow-pink));
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-      }
-
-      .nav-links a {
-        color: var(--text);
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-size: 0.95rem;
-        position: relative;
-        padding: 0.5rem 1rem;
-        border: 2px dashed transparent;
-      }
-
-      .nav-links a::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--primary);
-        transition: width 0.3s ease;
-      }
-
-      .nav-links a:hover {
-        color: var(--primary);
-        border-color: var(--primary);
-        text-shadow: 0 0 10px var(--glow-blue);
-      }
-
-      .nav-links a:hover::after {
-        width: 100%;
-      }
-
-      .nav ul li a{
-  text-decoration:none;
-  color:white;
-  padding:8px 14px;
-  border-radius:8px;
-  transition:0.3s ease;
-  display:inline-block;   /* 🔥 IMPORTANT FIX */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(5, 8, 18, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
 }
 
-.nav ul li a.active,
-.nav ul li a:hover{
-  border:2px dashed #00eaff;
-  color:#00eaff;
+/* Logo */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+/* Nav Links */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.95rem;
+  padding: 5px 0;
+  transition: 0.3s ease;
+}
+
+/* Hover Effect */
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* Animated Underline */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* Active Link */
+.nav-links a.active {
+  color: var(--primary);
+}
+
+/* Get In Touch Button */
+.get-in-touch-btn {
+  padding: 0.6rem 1.3rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.get-in-touch-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--primary);
+}
+
+  
 
       .get-in-touch-btn {
         padding: 0.75rem 1.5rem;
