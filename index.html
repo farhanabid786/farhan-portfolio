@@ -154,6 +154,21 @@
         width: 100%;
       }
 
+      .nav ul li a{
+  text-decoration:none;
+  color:white;
+  padding:8px 14px;
+  border-radius:8px;
+  transition:0.3s ease;
+  display:inline-block;   /* 🔥 IMPORTANT FIX */
+}
+
+.nav ul li a.active,
+.nav ul li a:hover{
+  border:2px dashed #00eaff;
+  color:#00eaff;
+}
+
       .get-in-touch-btn {
         padding: 0.75rem 1.5rem;
         background: linear-gradient(135deg, var(--secondary), var(--primary));
