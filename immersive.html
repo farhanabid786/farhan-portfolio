@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhan Abid - Interactive Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --secondary: #ff00ff;
+            --accent: #00ff88;
+            --dark: #0a0e27;
+            --darker: #050812;
+            --light: #f0f4ff;
+            --text: #e0e0e0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--text);
+        }
+
+        /* 3D Canvas */
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Floating Navigation Hub */
+        .nav-hub {
+            position: fixed;
+            top: 50%;
+            left: 2rem;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-hub-item {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-hub-item::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-hub-item:hover {
+            transform: scale(1.2);
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+        }
+
+        .nav-hub-item:hover::before {
+            opacity: 0.3;
+        }
+
+        .nav-hub-item.active {
+            background: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.8);
+            border-color: var(--secondary);
+        }
+
+        .nav-hub-tooltip {
+            position: absolute;
+            left: 80px;
+            background: rgba(10, 14, 39, 0.95);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--primary);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            font-size: 0.9rem;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-hub-item:hover .nav-hub-tooltip {
+            opacity: 1;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(5, 8, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            z-index: 200;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        .top-nav-items {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .top-nav-item {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        .top-nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .top-nav-item:hover {
+            color: var(--primary);
+        }
+
+        .top-nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* Content Panels */
+        .content-panel {
+            position: fixed;
+            background: rgba(10, 14, 39, 0.9);
+            border: 1px solid var(--primary);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+            z-index: 150;
+        }
+
+        .content-panel.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .content-panel.hero-panel {
+            width: 90%;
+            max-width: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .content-panel.about-panel {
+            width: 90%;
+            max-width: 500px;
+            top: 100px;
+            right: 2rem;
+        }
+
+        .content-panel.skills-panel {
+            width: 90%;
+            max-width: 450px;
+            bottom: 100px;
+            right: 2rem;
+        }
+
+        .content-panel.projects-panel {
+            width: 90%;
+            max-width: 550px;
+            bottom: 100px;
+            left: 2rem;
+        }
+
+        .content-panel.experience-panel {
+            width: 90%;
+            max-width: 500px;
+            top: 100px;
+            left: 2rem;
+        }
+
+        .content-panel.contact-panel {
+            width: 90%;
+            max-width: 400px;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+        }
+
+        .panel-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .panel-close:hover {
+            color: var(--secondary);
+            transform: rotate(90deg);
+        }
+
+        .panel-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+        }
+
+        .panel-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .panel-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Skill Cards */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent);
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-item:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Project Cards */
+        .project-item {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid var(--primary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-item:hover {
+            background: rgba(0, 212, 255, 0.15);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .project-title {
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--accent);
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+        }
+
+        /* Hotspots */
+        .hotspot {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 50;
+        }
+
+        .hotspot-inner {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hotspot-inner::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hotspot-icon {
+            position: relative;
+            z-index: 1;
+            font-size: 1.5rem;
+        }
+
+        .hotspot:hover .hotspot-inner {
+            transform: scale(1.3);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.3;
+            pointer-events: none;
+            font-size: 3rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-40px) translateX(-10px); }
+            75% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        /* Scrollable Content */
+        .scrollable-content {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* Modal for Resume */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 300;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 50px var(--primary);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-btn {
+            padding: 0.8rem 2rem;
+            margin: 0.5rem;
+            border: 2px solid var(--primary);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-hub {
+                top: auto;
+                bottom: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+            }
+
+            .content-panel {
+                width: 95% !important;
+                max-width: 95% !important;
+                top: auto !important;
+                left: 50% !important;
+                right: auto !important;
+                bottom: 80px !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .top-nav {
+                padding: 0 1rem;
+            }
+
+            .top-nav-items {
+                gap: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading immersive experience...</p>
+    </div>
+
+    <!-- Canvas for 3D Background -->
+    <canvas id="canvas"></canvas>
+
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <div class="logo" onclick="resetView()">FA</div>
+        <div class="top-nav-items">
+            <span class="top-nav-item" onclick="downloadResume()">📥 Resume</span>
+            <span class="top-nav-item" onclick="openPanel('contact')">💬 Contact</span>
+        </div>
+    </div>
+
+    <!-- Floating Navigation Hub (Left Side) -->
+    <div class="nav-hub">
+        <div class="nav-hub-item active" onclick="openPanel('hero')" data-zone="hero">
+            <span class="nav-hub-tooltip">Home</span>
+            🏠
+        </div>
+        <div class="nav-hub-item" onclick="openPanel('about')" data-zone="about">
+            <span class="nav-hub-tooltip">About</span>
+            👤
+        </div>
+        <div class="nav-hub-item" onclick="openPanel('skills')" data-zone="skills">
+            <span class="nav-hub-tooltip">Skills</span>
+            ⚡
+        </div>
+        <div class="nav-hub-item" onclick="openPanel('projects')" data-zone="projects">
+            <span class="nav-hub-tooltip">Projects</span>
+            🚀
+        </div>
+        <div class="nav-hub-item" onclick="openPanel('experience')" data-zone="experience">
+            <span class="nav-hub-tooltip">Experience</span>
+            💼
+        </div>
+    </div>
+
+    <!-- Content Panels -->
+    <div class="content-panel hero-panel" id="hero-panel">
+        <span class="panel-close" onclick="closePanel('hero')">×</span>
+        <h1 class="panel-title">Farhan Abid</h1>
+        <div class="panel-content">
+            <p><strong>AI Engineer | Data Science Enthusiast</strong></p>
+            <p>Welcome to my interactive portfolio. Explore different zones to discover my projects, skills, and experience. Click on the navigation orbs to navigate freely.</p>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--accent);">💡 Tip: Explore the environment and discover hidden interactions!</p>
+        </div>
+    </div>
+
+    <div class="content-panel about-panel" id="about-panel">
+        <span class="panel-close" onclick="closePanel('about')">×</span>
+        <h2 class="panel-title">About Me</h2>
+        <div class="panel-content">
+            <p>I'm a passionate B.Tech Computer Science & Engineering (AI) student from Babu Banarasi Das University, Lucknow.</p>
+            <p>Dedicated to leveraging technology to create real-world impact with strong foundation in AI, software engineering, and data-driven problem solving.</p>
+            <p><strong>Education:</strong> B.Tech CSE (AI) - CGPA 8.5/10</p>
+        </div>
+    </div>
+
+    <div class="content-panel skills-panel" id="skills-panel">
+        <span class="panel-close" onclick="closePanel('skills')">×</span>
+        <h2 class="panel-title">Technical Skills</h2>
+        <div class="scrollable-content">
+            <div class="panel-content">
+                <p><strong>Languages:</strong></p>
+                <div class="skill-grid">
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">SQL</div>
+                </div>
+                <p style="margin-top: 1rem;"><strong>Frameworks:</strong></p>
+                <div class="skill-grid">
+                    <div class="skill-item">Flask</div>
+                    <div class="skill-item">Streamlit</div>
+                    <div class="skill-item">TensorFlow</div>
+                    <div class="skill-item">React.js</div>
+                </div>
+                <p style="margin-top: 1rem;"><strong>Tools:</strong></p>
+                <div class="skill-grid">
+                    <div class="skill-item">Git/GitHub</div>
+                    <div class="skill-item">Linux</div>
+                    <div class="skill-item">Jupyter</div>
+                    <div class="skill-item">VS Code</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-panel projects-panel" id="projects-panel">
+        <span class="panel-close" onclick="closePanel('projects')">×</span>
+        <h2 class="panel-title">Featured Projects</h2>
+        <div class="scrollable-content">
+            <div class="panel-content">
+                <div class="project-item">
+                    <div class="project-title">AgriYield Predictor</div>
+                    <div class="project-desc">Random Forest-based crop yield prediction achieving 95%+ accuracy</div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">fastAPI</span>
+                        <span class="tech-tag">React</span>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">AI-Powered PDF Chatbot</div>
+                    <div class="project-desc">Multi-PDF chatbot with vector DB and NVIDIA Llama API</div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">FAISS</span>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">AI Complaint Management</div>
+                    <div class="project-desc">Chatbot-based system with admin dashboard. IBM Hackathon Finalist</div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Hugging Face</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-panel experience-panel" id="experience-panel">
+        <span class="panel-close" onclick="closePanel('experience')">×</span>
+        <h2 class="panel-title">Experience</h2>
+        <div class="scrollable-content">
+            <div class="panel-content">
+                <p><strong>AI Intern - Infosys Springboard</strong></p>
+                <p style="font-size: 0.85rem; color: var(--accent);">Oct 2025 – Dec 2025</p>
+                <p>Built end-to-end AI crop yield prediction with 95%+ accuracy</p>
+                
+                <p style="margin-top: 1.5rem;"><strong>Data Science Training - GRAStech</strong></p>
+                <p style="font-size: 0.85rem; color: var(--accent);">Jun 2025 – Aug 2025</p>
+                <p>Developed ML models with 15% accuracy improvement</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-panel contact-panel" id="contact-panel">
+        <span class="panel-close" onclick="closePanel('contact')">×</span>
+        <h2 class="panel-title">Get In Touch</h2>
+        <div class="panel-content">
+            <p><strong>Email:</strong></p>
+            <p><a href="mailto:f.abid.work@gmail.com" style="color: var(--primary); text-decoration: none;">f.abid.work@gmail.com</a></p>
+            
+            <p style="margin-top: 1rem;"><strong>Phone:</strong></p>
+            <p><a href="tel:+919335297959" style="color: var(--primary); text-decoration: none;">+91 93352 97959</a></p>
+            
+            <p style="margin-top: 1rem;"><strong>Location:</strong></p>
+            <p>Lucknow, Uttar Pradesh, India</p>
+            
+            <p style="margin-top: 1rem;">
+                <a href="https://github.com/farhanabid786" style="color: var(--accent); text-decoration: none; margin-right: 1rem;">GitHub</a>
+                <a href="https://linkedin.com/in/farhan-abid-8001a9253" style="color: var(--accent); text-decoration: none;">LinkedIn</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div class="modal" id="resumeModal">
+        <div class="modal-content">
+            <h2>📄 Download Resume</h2>
+            <p>Click below to download your professional resume</p>
+            <button class="modal-btn" onclick="triggerDownload()">⬇️ Download PDF</button>
+            <button class="modal-btn" onclick="closeModal()" style="background: transparent; border-color: var(--accent); color: var(--accent);">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Three.js for 3D Background
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Particle system for 3D effect
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.z = Math.random() * 100;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.vz = Math.random() * 0.5;
+                this.size = Math.random() * 2;
+                this.opacity = Math.random() * 0.5 + 0.3;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.z += this.vz;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                if (this.z < 0 || this.z > 100) this.vz *= -1;
+            }
+
+            draw() {
+                const scale = this.z / 100;
+                const opacity = this.opacity * scale;
+                ctx.fillStyle = `rgba(0, 212, 255, ${opacity})`;
+                ctx.fillRect(this.x, this.y, this.size * scale, this.size * scale);
+            }
+        }
+
+        const particles = [];
+        for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateBackground() {
+            ctx.fillStyle = 'rgba(5, 8, 18, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animateBackground);
+        }
+
+        animateBackground();
+
+        // Panel Management
+        function openPanel(panelId) {
+            // Close all panels
+            document.querySelectorAll('.content-panel').forEach(p => {
+                p.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-hub-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Open selected panel
+            const panel = document.getElementById(`${panelId}-panel`);
+            if (panel) {
+                panel.classList.add('active');
+            }
+
+            // Update nav hub
+            document.querySelector(`[data-zone="${panelId}"]`).classList.add('active');
+
+            // Hide loading
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function closePanel(panelId) {
+            const panel = document.getElementById(`${panelId}-panel`);
+            if (panel) {
+                panel.classList.remove('active');
+            }
+            document.querySelector(`[data-zone="${panelId}"]`).classList.remove('active');
+        }
+
+        function resetView() {
+            document.querySelectorAll('.content-panel').forEach(p => {
+                p.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-hub-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            openPanel('hero');
+        }
+
+        // Resume Download
+        function downloadResume() {
+            document.getElementById('resumeModal').classList.add('show');
+        }
+
+        function triggerDownload() {
+            const link = document.createElement('a');
+            link.href = '/FarhanAbidResume.pdf';
+            link.download = 'FarhanAbidResume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById('resumeModal').classList.remove('show');
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.content-panel').forEach(p => {
+                    p.classList.remove('active');
+                });
+            }
+        });
+
+        // Window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Initialize
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                openPanel('hero');
+            }, 500);
+        });
+
+        // Mouse tracking for parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 10;
+            const y = (e.clientY / window.innerHeight) * 10;
+            
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.style.transform = `translate(calc(-50% + ${x * 0.5}px), calc(-50% + ${y * 0.5}px))`;
+            });
+        });
+    </script>
+</body>
+</html>
