@@ -1044,6 +1044,28 @@ nav {
       }
 
       /* Footer */
+      /* ================= FOOTER SOCIAL LINKS ================= */
+
+footer .social-link {
+  display: flex;
+  justify-content: center;   /* center alignment */
+  align-items: center;
+  gap: 25px;                 /* space between icons */
+  margin-top: 20px;
+}
+
+footer .social-link img {
+  width: 50px;               /* reduce icon size */
+  height: 50px;
+  object-fit: contain;
+  transition: 0.3s ease;
+}
+
+footer .social-link img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px var(--primary));
+}
+      
       footer {
         padding: 2rem;
         text-align: center;
