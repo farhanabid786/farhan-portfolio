@@ -1055,27 +1055,60 @@ nav {
         box-shadow: 0 0 20px var(--glow-blue);
       }
 
-      /* ================= FOOTER SOCIAL LINKS ================= */
+      /* ================= SOCIAL SECTION ================= */
 
-footer .social-link {
+.social-section {
+  padding: 6rem 2rem;
+  background: rgba(5, 8, 18, 0.6);
+}
+
+.social-links {
   display: flex;
-  justify-content: center;   /* center alignment */
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Equal Size Social Boxes */
+
+.social-box {
+  width: 150px;
+  height: 60px;
+
+  display: flex;
   align-items: center;
-  gap: 25px;                 /* space between icons */
-  margin-top: 20px;
+  justify-content: center;
+
+  font-size: 20px;   /* Increased font size by ~10px */
+
+  text-decoration: none;
+  color: var(--primary);
+
+  border: 2px dashed var(--primary);
+  border-radius: 8px;
+
+  background: rgba(0, 212, 255, 0.05);
+
+  transition: all 0.3s ease;
+
+  box-shadow: 0 0 15px var(--glow-blue);
 }
 
-footer .social-link img {
-  width: 30px;               /* reduce icon size */
-  height: 30px;
-  object-fit: contain;
-  transition: 0.3s ease;
+/* Hover Effect */
+
+.social-box:hover {
+  color: var(--secondary);
+  border-color: var(--secondary);
+
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 0 25px var(--glow-blue),
+    0 0 15px var(--glow-pink);
 }
 
-footer .social-link img:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 10px var(--primary));
-}
+/* ================= FOOTER ================= */
+
       
 
       /* Responsive */
@@ -1425,26 +1458,47 @@ footer .social-link img:hover {
             <a href="https://maps.app.goo.gl/YQCSMnA3QFm4LuDp9">Lucknow, Uttar Pradesh, India</a>
           </div>
         </div>
-            <!-- Footer -->
-   <footer>
+
+        <!-- ================= SOCIAL LINKS ================= -->
+
+<section class="social-section">
+  <div class="section-container">
+    <h2 class="section-title">Connect With Me</h2>
+
     <div class="social-links">
 
-        <a href="https://github.com/farhanabid786" target="_blank" title="GitHub">
-            <img src="https://i.ibb.co/210fYNyx/github.png" alt="GitHub">
-        </a>
+      <a href="https://github.com/" target="_blank" class="social-box">
+        <span>GitHub</span>
+      </a>
 
-        <a href="https://linkedin.com/in/farhanabid786" target="_blank" title="LinkedIn">
-            <img src="https://i.ibb.co/7x088dSN/linkedin.png" alt="LinkedIn">
-        </a>
+      <a href="https://linkedin.com/" target="_blank" class="social-box">
+        <span>LinkedIn</span>
+      </a>
 
-        <a href="mailto:f.abid.work@gmail.com" title="Email">
-            <img src="https://i.ibb.co/4n1kd4R8/email.png" alt="Email">
-        </a>
+      <a href="mailto:farhan@email.com" class="social-box">
+        <span>Email</span>
+      </a>
+
+      <a href="https://twitter.com/" target="_blank" class="social-box">
+        <span>Twitter</span>
+      </a>
 
     </div>
+  </div>
+</section>
+        
+            <!-- Footer -->
+   <!-- ================= FOOTER ================= -->
 
-    <p>&copy; 2026 Farhan Abid. All rights reserved. | AI Engineer & Data Science Professional</p>
-   </footer>
+<footer class="footer">
+  <div class="footer-container">
+
+    <p class="footer-text">
+      © 2026 Farhan Abid | Crafted with Art and Passion 
+    </p>
+
+  </div>
+</footer>
 
     <script>
       // Generate stars
