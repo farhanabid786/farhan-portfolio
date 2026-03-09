@@ -1055,56 +1055,55 @@ nav {
         box-shadow: 0 0 20px var(--glow-blue);
       }
 
-      /* ================= SOCIAL SECTION ================= */
+/* ================= SOCIAL SECTION ================= */
 
-.social-section {
-  padding: 6rem 2rem;
-  background: rgba(5, 8, 18, 0.6);
+.social-section{
+padding:6rem 2rem;
+text-align:center;
+background:rgba(5,8,18,0.6);
 }
 
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
+.social-links{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:35px;
+margin-top:30px;
 }
 
-/* Equal Size Social Boxes */
+/* Equal size icons */
 
-.social-box {
-  width: 150px;
-  height: 60px;
+.social-links a{
+display:flex;
+justify-content:center;
+align-items:center;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+width:60px;
+height:60px;
 
-  font-size: 20px;   /* Increased font size by ~10px */
+border:2px dashed var(--primary);
+border-radius:10px;
 
-  text-decoration: none;
-  color: var(--primary);
+background:rgba(0,212,255,0.05);
 
-  border: 2px dashed var(--primary);
-  border-radius: 8px;
-
-  background: rgba(0, 212, 255, 0.05);
-
-  transition: all 0.3s ease;
-
-  box-shadow: 0 0 15px var(--glow-blue);
+transition:0.3s;
 }
 
-/* Hover Effect */
+.social-links img{
+width:32px;   /* increased size */
+height:32px;
+}
 
-.social-box:hover {
-  color: var(--secondary);
-  border-color: var(--secondary);
+/* Hover glow */
 
-  transform: translateY(-5px);
+.social-links a:hover{
+transform:translateY(-5px) scale(1.1);
+border-color:var(--secondary);
 
-  box-shadow:
-    0 0 25px var(--glow-blue),
-    0 0 15px var(--glow-pink);
+box-shadow:
+0 0 20px var(--glow-blue),
+0 0 10px var(--glow-pink);
+}
 }
 
 /* ================= FOOTER ================= */
@@ -1462,29 +1461,25 @@ nav {
         <!-- ================= SOCIAL LINKS ================= -->
 
 <section class="social-section">
-  <div class="section-container">
+
     <h2 class="section-title">Connect With Me</h2>
 
     <div class="social-links">
 
-      <a href="https://github.com/" target="_blank" class="social-box">
-        <span>GitHub</span>
-      </a>
+        <a href="https://github.com/farhanabid786" target="_blank" title="GitHub">
+            <img src="https://i.ibb.co/210fYNyx/github.png" alt="GitHub">
+        </a>
 
-      <a href="https://linkedin.com/" target="_blank" class="social-box">
-        <span>LinkedIn</span>
-      </a>
+        <a href="https://linkedin.com/in/farhanabid786" target="_blank" title="LinkedIn">
+            <img src="https://i.ibb.co/7x088dSN/linkedin.png" alt="LinkedIn">
+        </a>
 
-      <a href="mailto:farhan@email.com" class="social-box">
-        <span>Email</span>
-      </a>
-
-      <a href="https://twitter.com/" target="_blank" class="social-box">
-        <span>Twitter</span>
-      </a>
+        <a href="mailto:f.abid.work@gmail.com" title="Email">
+            <img src="https://i.ibb.co/4n1kd4R8/email.png" alt="Email">
+        </a>
 
     </div>
-  </div>
+
 </section>
         
             <!-- Footer -->
@@ -1494,7 +1489,7 @@ nav {
   <div class="footer-container">
 
     <p class="footer-text">
-      © 2026 Farhan Abid | Crafted with Art and Passion 
+      © 2026 Farhan Abid | All Rights Reserved | Crafted with Art and Passion 
     </p>
 
   </div>
