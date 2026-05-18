@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhan Abid - AI Engineer & ML Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 1.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4F46E5;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        section h3 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-card p {
+            opacity: 0.9;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .project-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: #f0f0f0;
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* AI Tools Section */
+        .ai-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .ai-tool-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .ai-tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ai-tool-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-tool-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .ai-tool-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 1rem;
+        }
+
+        .modal-header h2 {
+            color: #667eea;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        /* Deepfake Detection */
+        .deepfake-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f8f9ff;
+        }
+
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f0f0ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #e8e8ff;
+        }
+
+        .upload-area input {
+            display: none;
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .image-preview {
+            display: none;
+            text-align: center;
+        }
+
+        .image-preview.active {
+            display: block;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .detection-result {
+            display: none;
+            padding: 1.5rem;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .detection-result.active {
+            display: block;
+        }
+
+        .result-status {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                margin: 0.5rem;
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .ai-tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#tools">AI Tools</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <h1>👋 Hi, I'm Farhan Abid</h1>
+        <p>AI Engineer • Machine Learning Developer • Data Science Enthusiast</p>
+        <p style="margin-top: 1rem; opacity: 0.9;">Focused on innovation and growth, I'm a computer science graduate dedicated to leveraging technology to create real-world impact.</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I'm a passionate B.Tech Computer Science & Engineering (AI) student from Babu Banarasi Das University, Lucknow, dedicated to leveraging technology to create real-world impact.</p>
+            <p style="margin-top: 1rem;">With a strong foundation in AI, software engineering, and data-driven problem solving, I'm committed to building intelligent and scalable digital solutions.</p>
+            
+            <h3>📚 Education</h3>
+            <p><strong>B.Tech in Computer Science Engineering (AI)</strong></p>
+            <p>Babu Banarasi Das University, Lucknow</p>
+            <p>CGPA: 8.5/10</p>
+
+            <h3>🎯 Objective</h3>
+            <p>To leverage my expertise in AI and Data Science to develop innovative solutions that drive business value and contribute to technological advancement.</p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4>🧠 Programming</h4>
+                    <p>Python, SQL, JavaScript, Java</p>
+                </div>
+                <div class="skill-card">
+                    <h4>🤖 AI & Machine Learning</h4>
+                    <p>TensorFlow, Scikit-learn, Deep Learning, NLP</p>
+                </div>
+                <div class="skill-card">
+                    <h4>📊 Data Science</h4>
+                    <p>Pandas, NumPy, Matplotlib, Data Visualization</p>
+                </div>
+                <div class="skill-card">
+                    <h4>💻 Web Development</h4>
+                    <p>React.js, Flask, FastAPI, HTML/CSS</p>
+                </div>
+                <div class="skill-card">
+                    <h4>🔗 GenAI & LLMs</h4>
+                    <p>LangChain, RAG Systems, Hugging Face, Prompt Engineering</p>
+                </div>
+                <div class="skill-card">
+                    <h4>🛠️ Tools & Platforms</h4>
+                    <p>Git/GitHub, Google Cloud, AWS, Jupyter</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>AgriYield Predictor</h3>
+                    <p>Random Forest-based crop yield prediction web application achieving 95%+ accuracy and time-series yield forecasting (76%) as part of the Infosys Springboard virtual internship.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Random Forest</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Prophet</span>
+                    </div>
+                    <a href="https://github.com/farhanabid786" class="btn btn-primary" style="margin-top: 1rem;">View on GitHub →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>AI-Powered Chitti – Multi-PDF Chatbot</h3>
+                    <p>Developed a chatbot enabling natural-language queries across multiple PDFs using vector DB and REST APIs for efficient retrieval. Powered by NVIDIA Llama API and LangChain for advanced NLP capabilities.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">FAISS</span>
+                        <span class="tech-tag">NVIDIA Llama</span>
+                        <span class="tech-tag">LangChain</span>
+                    </div>
+                    <a href="https://github.com/farhanabid786" class="btn btn-primary" style="margin-top: 1rem;">View on GitHub →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>AI Complaint Management System</h3>
+                    <p>Developed a chatbot-based complaint management system with user login, admin dashboard and AI-driven ticketing workflows. Implemented vector search and REST API integration for faster ticket resolution. IBM Hackathon Finalist.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Hugging Face</span>
+                        <span class="tech-tag">REST APIs</span>
+                    </div>
+                    <a href="https://github.com/farhanabid786" class="btn btn-primary" style="margin-top: 1rem;">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2>Experience & Training</h2>
+            
+            <h3>🤖 Artificial Intelligence Intern</h3>
+            <p><strong>Oct 2025 – Dec 2025</strong></p>
+            <p><strong>Infosys Springboard Certification</strong></p>
+            <p>Built end-to-end AI-powered Crop Yield Prediction and Time-Series Forecasting web application. Achieved 95%+ accuracy using Random Forest for yield prediction and 76% accuracy using Prophet for forecasting. Full-stack deployment using fastAPI and React.</p>
+
+            <h3>📚 Summer Training – Data Science</h3>
+            <p><strong>Jun 2025 – Aug 2025</strong></p>
+            <p><strong>GRAStech Certification</strong></p>
+            <p>Developed classification models for rainfall and diabetes prediction using Python. Improved accuracy by 15% from baseline. Worked with real-world datasets and implemented various ML algorithms.</p>
+
+            <h3>🎓 B.Tech in Computer Science Engineering (AI)</h3>
+            <p><strong>Sept 2022 – June 2026</strong></p>
+            <p><strong>Babu Banarasi Das University, Lucknow</strong></p>
+            <p>CGPA: 8.5/10. Focused on AI, machine learning, data structures, and algorithms. Active participant in hackathons and technical projects.</p>
+
+            <h3>🏆 Achievements & Certifications</h3>
+            <p>🏆 Finalist – IBM Expert Labs National Hackathon (Aug 2025)</p>
+            <p>🎓 Artificial Intelligence Primer - Infosys Springboard (June 2025)</p>
+            <p>🎓 Machine Learning Certification - Soft Computing Research Society (Jan 2025)</p>
+        </section>
+
+        <!-- AI Tools Section -->
+        <section id="tools">
+            <h2>AI Tools & Features</h2>
+            <p style="margin-bottom: 2rem;">Explore cutting-edge AI applications integrated directly into my portfolio. These tools showcase my expertise in building intelligent solutions.</p>
+            
+            <div class="ai-tools-grid">
+                <div class="ai-tool-card">
+                    <div class="ai-tool-icon">🛡️</div>
+                    <h3>Deepfake Detection</h3>
+                    <p>Upload an image and detect whether it is REAL or AI GENERATED using Deep Learning. Advanced face detection using ResNet50 model with ~97% accuracy.</p>
+                    <button class="btn btn-primary" onclick="openDeepfakeModal()">Open Detector</button>
+                </div>
+
+                <div class="ai-tool-card">
+                    <div class="ai-tool-icon">💬</div>
+                    <h3>AI Chatbot</h3>
+                    <p>Intelligent chatbot assistant available in the bottom-right corner. Ask me questions about my projects, skills, and experience.</p>
+                    <button class="btn btn-primary" onclick="alert('Chatbot feature coming soon!')">Open Chat</button>
+                </div>
+
+                <div class="ai-tool-card">
+                    <div class="ai-tool-icon">📊</div>
+                    <h3>Data Insights</h3>
+                    <p>Explore my portfolio data, project statistics, and technical expertise through interactive visualizations and detailed project breakdowns.</p>
+                    <button class="btn btn-primary" onclick="alert('Data insights coming soon!')">Explore</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Deepfake Detection Modal -->
+    <div class="modal" id="deepfakeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛡️ AI Deepfake Detection</h2>
+                <button class="modal-close" onclick="closeDeepfakeModal()">&times;</button>
+            </div>
+
+            <div class="deepfake-container">
+                <!-- Upload Area -->
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageInput" accept="image/*">
+                    <div class="upload-text">Upload Image for Detection</div>
+                    <div class="upload-hint">Drag & Drop or Click to Upload</div>
+                </div>
+
+                <!-- Preview -->
+                <div class="image-preview" id="imagePreview">
+                    <img id="previewImg" src="" alt="Preview">
+                </div>
+
+                <!-- Detect Button -->
+                <button class="btn btn-primary" id="detectBtn" onclick="detectDeepfake()" style="width: 100%; padding: 1rem;">
+                    Detect Deepfake
+                </button>
+
+                <!-- Loading -->
+                <div id="loadingBox" style="display:none; text-align:center; padding:1rem;">
+                    <div style="
+                        width:50px;
+                        height:50px;
+                        border:5px solid #ddd;
+                        border-top:5px solid #667eea;
+                        border-radius:50%;
+                        margin:auto;
+                        animation: rotate 1s linear infinite;
+                    "></div>
+                    <p style="margin-top:1rem; color:#6B7280;">Analyzing Image...</p>
+                </div>
+
+                <!-- Result -->
+                <div class="detection-result" id="detectionResult">
+                    <div class="result-status" id="resultStatus"></div>
+                    <div style="margin-top:1rem;">
+                        <p><strong>Confidence:</strong> <span id="confidenceText"></span></p>
+                    </div>
+                    <div style="
+                        width:100%;
+                        height:12px;
+                        background:#E5E7EB;
+                        border-radius:10px;
+                        margin-top:1rem;
+                        overflow:hidden;
+                    ">
+                        <div id="confidenceBar" style="
+                            height:100%;
+                            width:0%;
+                            transition:0.5s ease;
+                            border-radius:10px;
+                            background:linear-gradient(90deg,#667eea,#764ba2);
+                        "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Farhan Abid. All rights reserved.</p>
+        <p>
+            <a href="https://github.com/farhanabid786">GitHub</a> | 
+            <a href="https://linkedin.com/in/farhanabid786">LinkedIn</a> | 
+            <a href="mailto:f.abid.work@gmail.com">Email</a>
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // =========================
+        // MODAL FUNCTIONS
+        // =========================
+
+        const modal = document.getElementById("deepfakeModal");
+
+        function openDeepfakeModal() {
+            modal.classList.add("active");
+        }
+
+        function closeDeepfakeModal() {
+            modal.classList.remove("active");
+            resetDeepfakeForm();
+        }
+
+        window.onclick = function(e) {
+            if (e.target === modal) {
+                closeDeepfakeModal();
+            }
+        }
+
+        function resetDeepfakeForm() {
+            document.getElementById('imageInput').value = '';
+            document.getElementById('imagePreview').classList.remove('active');
+            document.getElementById('detectionResult').classList.remove('active');
+            document.getElementById('loadingBox').style.display = 'none';
+        }
+
+        // =========================
+        // FILE UPLOAD
+        // =========================
+
+        const uploadArea = document.getElementById("uploadArea");
+        const imageInput = document.getElementById("imageInput");
+
+        uploadArea.addEventListener("click", () => {
+            imageInput.click();
+        });
+
+        uploadArea.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            uploadArea.classList.add("dragover");
+        });
+
+        uploadArea.addEventListener("dragleave", () => {
+            uploadArea.classList.remove("dragover");
+        });
+
+        uploadArea.addEventListener("drop", (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove("dragover");
+
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                // Validate file type
+                const file = files[0];
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/bmp'];
+                
+                if (!validTypes.includes(file.type)) {
+                    alert('Please upload a valid image format (JPG, PNG, WebP, GIF, BMP)');
+                    return;
+                }
+
+                imageInput.files = files;
+                previewImage(file);
+            }
+        });
+
+        imageInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                // Validate file type
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/bmp'];
+                
+                if (!validTypes.includes(file.type)) {
+                    alert('Please upload a valid image format (JPG, PNG, WebP, GIF, BMP)');
+                    imageInput.value = '';
+                    return;
+                }
+
+                previewImage(file);
+            }
+        });
+
+        // =========================
+        // IMAGE PREVIEW
+        // =========================
+
+        function previewImage(file) {
+            const previewContainer = document.getElementById("imagePreview");
+            const previewImg = document.getElementById("previewImg");
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                previewContainer.classList.add("active");
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        // =========================
+        // DEEPFAKE DETECTION
+        // =========================
+
+        async function detectDeepfake() {
+            const file = imageInput.files[0];
+
+            if (!file) {
+                alert("Please upload an image first.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const loadingBox = document.getElementById("loadingBox");
+            const resultBox = document.getElementById("detectionResult");
+
+            loadingBox.style.display = "block";
+            resultBox.classList.remove("active");
+
+            try {
+                const response = await fetch("https://deepfake-detector-i5st.onrender.com/predict", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error("Server Error: " + response.statusText);
+                }
+
+                const data = await response.json();
+                console.log("API Response:", data);
+
+                loadingBox.style.display = "none";
+                showResult(data);
+
+            } catch (error) {
+                console.error("Error:", error);
+                loadingBox.style.display = "none";
+                
+                const resultBox = document.getElementById("detectionResult");
+                const resultStatus = document.getElementById("resultStatus");
+                
+                resultBox.classList.add("active");
+                resultStatus.innerHTML = `
+                    <span style="color:#EF4444;">
+                        ⚠️ Error connecting to backend server. Please try again later.
+                    </span>
+                `;
+                document.getElementById("confidenceText").innerText = "Error";
+            }
+        }
+
+        // =========================
+        // SHOW RESULT
+        // =========================
+
+        function showResult(data) {
+            const resultBox = document.getElementById("detectionResult");
+            const resultStatus = document.getElementById("resultStatus");
+            const confidenceText = document.getElementById("confidenceText");
+            const confidenceBar = document.getElementById("confidenceBar");
+
+            resultBox.classList.add("active");
+
+            // Handle different API response formats
+            let prediction = data.prediction || data.result || data.label || "Unknown";
+            let confidence = parseFloat(data.confidence || data.score || 0).toFixed(2);
+
+            // Convert numeric predictions to string
+            if (typeof prediction === 'number') {
+                prediction = prediction === 1 ? "REAL" : "FAKE";
+            }
+
+            confidenceText.innerText = confidence + "%";
+            confidenceBar.style.width = confidence + "%";
+
+            if (prediction.toString().toUpperCase().includes("REAL")) {
+                resultStatus.innerHTML = `
+                    <span style="color:#10B981; font-size: 1.2rem;">
+                        ✅ REAL IMAGE
+                    </span>
+                `;
+                confidenceBar.style.background = "linear-gradient(90deg,#10B981,#34D399)";
+            } else {
+                resultStatus.innerHTML = `
+                    <span style="color:#EF4444; font-size: 1.2rem;">
+                        ❌ DEEPFAKE DETECTED
+                    </span>
+                `;
+                confidenceBar.style.background = "linear-gradient(90deg,#EF4444,#F87171)";
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
